@@ -40,7 +40,6 @@ export const experiences: DataExperience[] = [
     description:
       'Refactored and improved the responsiveness of key application components. Collaborated with backend developers to ensure reliable data flow from meters, while supporting data visualization and enhancing the overall interface in coordination with the design team.',
     stack: ['React', 'SASS', ...WEB],
-    url: 'https://iotam.com.mx/',
   },
   {
     id: 'brightcoders',
