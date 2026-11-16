@@ -19,7 +19,7 @@ export async function generateMetadata({
   const description = t('meta_description');
 
   return {
-    metadataBase: new URL('https://javierchiortiz.dev'),
+    metadataBase: new URL('https://mk2.javierchiortiz.dev'),
     title: {
       default: title,
       template: '%s | Javier Chi',
