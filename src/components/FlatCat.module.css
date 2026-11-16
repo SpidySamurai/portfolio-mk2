@@ -1,0 +1,307 @@
+/* Flat Geometric Orange Cat (Terracotta Style) */
+.sleeping-cat-wrapper {
+  /* Variables Moved Here */
+  --flat-cat-white: #fdfdfd;
+  --flat-cat-orange: #e67e22;
+  --flat-cat-nose: #e08e79;
+  --flat-cat-eye-bg: #f2c94c;
+  --flat-cat-eye-pupil: #33292b;
+
+  position: fixed;
+  bottom: 0.5rem;
+  /* Closer to edge */
+  right: 0.5rem;
+  width: 100px;
+  /* Big click target */
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  /* Sit at bottom */
+  z-index: 9999;
+  cursor: pointer;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.sleeping-cat-wrapper:active .flat-cat-anim {
+  transform: scale(0.32);
+  /* Press effect on inner */
+}
+
+/* Inner Container for Scale & Animation */
+.flat-cat-anim {
+  width: 120px;
+  height: 150px;
+  /* Origin bottom right relevant to the wrapper content */
+  transform-origin: bottom right;
+  animation: bob 3s ease-in-out infinite;
+}
+
+.flat-cat {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* --- Body (The Main Block) --- */
+.cat-body {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 90px;
+  height: 100px;
+  background-color: var(--flat-cat-white);
+  /* Orange Patch on back */
+  background-image: radial-gradient(circle at 0% 50%, var(--flat-cat-orange) 40%, transparent 41%);
+  border-radius: 40px 40px 0 0;
+}
+
+/* Tail (Flat Pill) - No Animation */
+.cat-tail {
+  position: absolute;
+  bottom: 0px;
+  right: -20px;
+  width: 50px;
+  height: 25px;
+  background-color: var(--flat-cat-orange);
+  /* Stripes */
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 8px,
+    rgba(0, 0, 0, 0.05) 8px,
+    rgba(0, 0, 0, 0.05) 16px
+  );
+  border-radius: 0 25px 25px 0;
+  transform-origin: right center;
+  /* animation removed as requested */
+}
+
+/* Paw details (Cutouts) */
+.cat-body::before,
+.cat-body::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 16px;
+  height: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px 10px 0 0;
+}
+
+.cat-body::before {
+  left: 15px;
+}
+
+.cat-body::after {
+  left: 45px;
+}
+
+/* --- Head (Rounded Square) --- */
+.cat-head {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 90px;
+  background-color: var(--flat-cat-white);
+  /* Orange patch on top right/left of head */
+  background-image: linear-gradient(135deg, var(--flat-cat-orange) 35%, transparent 35%);
+  border-radius: 45px;
+  z-index: 2;
+}
+
+/* --- Ears --- */
+.cat-ear {
+  position: absolute;
+  top: -15px;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 40px solid var(--flat-cat-orange);
+  z-index: 1;
+}
+
+.cat-ear.left {
+  left: 5px;
+  transform: rotate(-15deg);
+}
+
+.cat-ear.right {
+  right: 5px;
+  transform: rotate(15deg);
+}
+
+.cat-ear::after {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: -8px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 25px solid var(--flat-cat-nose);
+}
+
+/* --- Face --- */
+.cat-face {
+  position: absolute;
+  top: 35px;
+  left: 15px;
+  width: 70px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cat-eye {
+  width: 24px;
+  height: 24px;
+  background-color: var(--flat-cat-eye-bg);
+  border-radius: 50%;
+  position: relative;
+  border: 3px solid var(--flat-cat-eye-pupil);
+}
+
+.cat-eye::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* Move based on JS variables, default to 0 */
+  transform: translate(calc(-50% + var(--pupil-x, 0px)), calc(-50% + var(--pupil-y, 0px)));
+  width: 8px;
+  height: 8px;
+  background-color: var(--flat-cat-eye-pupil);
+  border-radius: 50%;
+  transition: transform 0.1s ease-out;
+  /* Smooth movement */
+}
+
+.cat-nose {
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 8px solid var(--flat-cat-nose);
+}
+
+.cat-nose::before,
+.cat-nose::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  width: 2px;
+  height: 6px;
+  background-color: var(--flat-cat-nose);
+}
+
+.cat-nose::before {
+  left: -3px;
+  transform: rotate(30deg);
+}
+
+.cat-nose::after {
+  right: -3px;
+  transform: rotate(-30deg);
+}
+
+/* --- Whiskers --- */
+.cat-face::before,
+.cat-face::after {
+  content: '';
+  position: absolute;
+  top: 55%;
+  width: 35px;
+  height: 1.5px;
+  background-color: rgba(51, 41, 43, 0.35);
+  border-radius: 2px;
+}
+
+.cat-face::before {
+  left: -30px;
+  transform: rotate(-8deg);
+}
+
+.cat-face::after {
+  right: -30px;
+  transform: rotate(8deg);
+}
+
+/* --- Speech Bubble --- */
+.cat-bubble {
+  position: absolute;
+  top: -180px;
+  left: auto;
+  right: 10px;
+  background: rgba(11, 19, 38, 0.96);
+  border: 1.5px solid rgba(192, 193, 255, 0.25);
+  padding: 18px 36px;
+  min-width: 280px;
+  text-align: center;
+  border-radius: 50px;
+  border-bottom-right-radius: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #dae2fd;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 32px rgba(11, 19, 38, 0.6), 0 0 0 1px rgba(192, 193, 255, 0.08);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 99999;
+}
+
+.cat-bubble.show {
+  animation: pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* --- Animations --- */
+/* --- Animations --- */
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0) scale(0.35);
+    /* Scale is applied here on the inner container */
+  }
+
+  50% {
+    transform: translateY(-10px) scale(0.35);
+  }
+}
+
+@keyframes tail-wag {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(10deg);
+  }
+
+  75% {
+    transform: rotate(-10deg);
+  }
+}
