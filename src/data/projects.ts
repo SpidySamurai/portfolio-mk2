@@ -27,19 +27,6 @@ export const projects: DataProject[] = [
     hidden: true,
   },
   {
-    id: 'checker',
-    title: 'Checker',
-    imageUrl: '/utils/img/checker-screenshot.png',
-    description:
-      'Fleet management SaaS for gig drivers on Uber, Didi, Cabify and InDrive: shifts, earnings, and vehicle tracking in one place.',
-    stack: ['Next.js', 'TypeScript', 'React'],
-    liveUrl: 'http://checker.lab2next.com/',
-    repoUrl: 'https://github.com/SpidySamurai/checker',
-    category: 'featured',
-    status: 'wip',
-    hidden: true,
-  },
-  {
     id: 'scandia-ecommerce',
     title: 'Scandia Manufacturing',
     imageUrl: '/utils/img/scandia-manufacturing-screenshot.png',
